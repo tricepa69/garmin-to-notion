@@ -2,7 +2,7 @@ name: Sync Garmin to Notion
 
 on:
   schedule:
-    - cron: '0 6 * * *' #  Tous les jours à 06:00 UTC (07:00 en heure de Paris en hiver)
+    - cron: '0 9 * * *' #  Tous les jours à 09:00 UTC (10:00 en heure de Paris en hiver)
   workflow_dispatch:
 env:
   TZ: 'Europe/Paris'
