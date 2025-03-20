@@ -105,13 +105,16 @@ def main():
 
     daily_steps = get_all_daily_steps(garmin)
     for steps in daily_steps:
-        steps_date = steps.get('calendarDate')
-        existing_steps = daily_steps_exist(client, database_id, steps_date)
-        if existing_steps:
-            if steps_need_update(existing_steps, steps):
-                update_daily_steps(client, existing_steps, steps)
-        else:
-            create_daily_steps(client, database_id, steps)
+    steps_date = steps.get('calendarDate')
+    existing_steps = daily_steps_exist(client, database_id, steps_date)
+    
+    print("DEBUG existing_steps:", existing_steps)  # Ajout du print pour debug
+    
+    if existing_steps:
+        if steps_need_update(existing_steps, steps):
+            update_daily_steps(client, existing_steps, steps)
+    else:
+        create_daily_steps(client, database_id, steps)
 
 if __name__ == '__main__':
     main()
