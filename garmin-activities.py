@@ -137,6 +137,13 @@ def activity_exists(client, database_id, activity_date, activity_type, activity_
 def activity_needs_update(existing_activity, new_activity):
     existing_props = existing_activity['properties']
     
+    # Vérifier la propriété "Training Effect" avant d'y accéder
+    training_effect_prop = existing_props.get("Training Effect")
+    if not training_effect_prop or not training_effect_prop.get("select"):
+        return True  # ou False, selon ta logique
+    
+    training_effect_name = training_effect_prop["select"].get("name", "Unknown")
+    
     activity_name = new_activity.get('activityName', '').lower()
     activity_type, activity_subtype = format_activity_type(
         new_activity.get('activityType', {}).get('typeKey', 'Unknown'),
